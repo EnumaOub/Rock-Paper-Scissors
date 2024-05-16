@@ -37,35 +37,42 @@ function PlayRound(CompC, HumanC) {
     console.log(`\n`)
     if ( CompC == HumanC) {
         console.log(`You put the same Equality : ${HumanC}`)
+        alert(`You put the same Equality : ${HumanC}`)
         return "Equal";
     }
     else if (CompC == "rock"){
         if (HumanC == "scissors") {
             console.log(`You lose! ${CompC} beat ${HumanC}`)
+            alert(`You lose! ${CompC} beat ${HumanC}`)
             return "Computer";
         }
         else {
             console.log(`You win! ${HumanC} beat ${CompC}`)
+            alert(`You win! ${HumanC} beat ${CompC}`)
             return "Human";
         }
     }
     else if (CompC == "scissors"){
         if (HumanC == "paper") {
             console.log(`You lose! ${CompC} beat ${HumanC}`)
+            alert(`You lose! ${CompC} beat ${HumanC}`)
             return "Computer";
         }
         else {
             console.log(`You win! ${HumanC} beat ${CompC}`)
+            alert(`You win! ${HumanC} beat ${CompC}`)
             return "Human";
         }
     }
     else if (CompC == "paper"){
         if (HumanC == "rock") {
             console.log(`You lose! ${CompC} beat ${HumanC}`)
+            alert(`You lose! ${CompC} beat ${HumanC}`)
             return "Computer";
         }
         else {
             console.log(`You win! ${HumanC} beat ${CompC}`)
+            alert(`You win! ${HumanC} beat ${CompC}`)
             return "Human";
         }
     }
@@ -83,16 +90,20 @@ function PlayGame(){
             CompS += 1;
         }
         console.log(`\nGame ${i+1}: the score are ${HumanS} for human against ${CompS} for the computer\n`)
+        alert(`Game ${i+1}: the score are ${HumanS} for human against ${CompS} for the computer`)
 
     }
     if (HumanS > CompS) {
         console.log(`\nYou won ${HumanS}\\${CompS}`)
+        alert(`You won ${HumanS}\\${CompS}`)
     }
     else if (HumanS < CompS) {
         console.log(`\nYou lose  ${CompS}\\${HumanS}`)
+        alert(`You lose  ${CompS}\\${HumanS}`)
     }
     else {
         console.log(`\nYou have an equal score  ${CompS}\\${HumanS}`)
+        alert(`You have an equal score  ${CompS}\\${HumanS}`)
     }
 }
 
