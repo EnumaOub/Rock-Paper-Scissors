@@ -1,19 +1,9 @@
-// function add7(nb) {
-//     return +nb +7;
-// }
-
-// function multipy(a, b) {
-//     return +a * +b;
-// }
-
-// function capitalise(str) {
-//     return str.toUpperCase();
-// }
-
-// function lastletter(str) {
-//     return str.at(-1);
-// }
-
+let results = {
+    human: 0,
+    computer: 0
+};
+    
+let round = 0;
 
 function getComputerChoice() {
     let ind = Math.round(Math.random()*2);
@@ -21,90 +11,133 @@ function getComputerChoice() {
     return valC[ind];
 }
 
-function getHumanChoice() {
-    let humanC;
-    let checkC = true;
-    while( checkC ) {
-        humanC = prompt( "Rock, Paper or Scissors", "rock" ).toLowerCase();
-        if ( humanC == "rock" || humanC == "paper" || humanC == "scissors" ) {
-            checkC = false;
-        }
-    }
-    return humanC;
-}
 
-function PlayRound(CompC, HumanC) {
+function PlayRound(HumanC) {
     console.log(`\n`)
+    let CompC = getComputerChoice()
+    let val_res = ""
+    let res = document.getElementsByClassName("res_val")[0];
+    
     if ( CompC == HumanC) {
-        console.log(`You put the same Equality : ${HumanC}`)
-        alert(`You put the same Equality : ${HumanC}`)
-        return "Equal";
+        console.log(`It's a tie : ${HumanC}`)
+        res.textContent = `It's a tie : ${HumanC}`
+        val_res = "Equal";
     }
     else if (CompC == "rock"){
         if (HumanC == "scissors") {
             console.log(`You lose! ${CompC} beat ${HumanC}`)
-            alert(`You lose! ${CompC} beat ${HumanC}`)
-            return "Computer";
+            res.textContent = `You lose! ${CompC} beat ${HumanC}`
+            val_res = "Computer";
         }
         else {
             console.log(`You win! ${HumanC} beat ${CompC}`)
-            alert(`You win! ${HumanC} beat ${CompC}`)
-            return "Human";
+            res.textContent = `You win! ${HumanC} beat ${CompC}`
+            val_res = "Human";
         }
     }
     else if (CompC == "scissors"){
         if (HumanC == "paper") {
             console.log(`You lose! ${CompC} beat ${HumanC}`)
-            alert(`You lose! ${CompC} beat ${HumanC}`)
-            return "Computer";
+            res.textContent = `You lose! ${CompC} beat ${HumanC}`
+            val_res = "Computer";
         }
         else {
             console.log(`You win! ${HumanC} beat ${CompC}`)
-            alert(`You win! ${HumanC} beat ${CompC}`)
-            return "Human";
+            res.textContent = `You win! ${HumanC} beat ${CompC}`
+            val_res = "Human";
         }
     }
     else if (CompC == "paper"){
         if (HumanC == "rock") {
             console.log(`You lose! ${CompC} beat ${HumanC}`)
-            alert(`You lose! ${CompC} beat ${HumanC}`)
-            return "Computer";
+            res.textContent = `You lose! ${CompC} beat ${HumanC}`
+            val_res = "Computer";
         }
         else {
             console.log(`You win! ${HumanC} beat ${CompC}`)
-            alert(`You win! ${HumanC} beat ${CompC}`)
-            return "Human";
+            res.textContent = `You win! ${HumanC} beat ${CompC}`
+            val_res = "Human";
         }
+    }
+    UpdateResults(val_res)
+}
+
+function UpdateResults(res){
+    let round_val = document.getElementsByClassName("round")[0];
+    let human_res = document.getElementsByClassName("human-res")[0];
+    let computer_res = document.getElementsByClassName("computer-res")[0];
+    if (res == "Human") {
+        results.human += 1;
+    }
+    else if (res == "Computer") {
+        results.computer += 1;
+    }
+    round += 1;
+    round_val.textContent = `${round}`
+    human_res.textContent = `${results.human}`
+    computer_res.textContent = `${results.computer}`
+    if (results.human == 5 || results.computer == 5) {
+        EndGame(res);
     }
 }
 
-function PlayGame(){
-    let HumanS = 0;
-    let CompS = 0;
-    for (let i=0; i<5; i++) {
-        res = PlayRound(getComputerChoice(), getHumanChoice())
-        if (res == "Human") {
-            HumanS += 1;
-        }
-        else if (res == "Computer") {
-            CompS += 1;
-        }
-        console.log(`\nGame ${i+1}: the score are ${HumanS} for human against ${CompS} for the computer\n`)
-        alert(`Game ${i+1}: the score are ${HumanS} for human against ${CompS} for the computer`)
+function EndGame(val) {
+    let res = document.getElementsByClassName("res_val")[0];
+    // Show the message of the end
+    if (val == "Human") {
+        res.textContent = `You win!`;
+    }
+    else if (val == "Computer") {
+        res.textContent = `You lose!`;
+    }
+    res.style["font-weight"] = "bold";
+    // Reset score value in memory
+    results.human = 0;
+    results.computer = 0;
+    round = 0;
+    // Delete buttons allowing to play
+    const all_buttons = document.querySelectorAll("button");
+    all_buttons.forEach((item) => {
+        item.remove();
+    })
+    // Create a new Button allowing the restart of the game
+    const button = document.createElement("button");
+    const div = document.getElementsByClassName("bbt")[0];
+    button.textContent = "Restart Game ?"
 
-    }
-    if (HumanS > CompS) {
-        console.log(`\nYou won ${HumanS}\\${CompS}`)
-        alert(`You won ${HumanS}\\${CompS}`)
-    }
-    else if (HumanS < CompS) {
-        console.log(`\nYou lose  ${CompS}\\${HumanS}`)
-        alert(`You lose  ${CompS}\\${HumanS}`)
-    }
-    else {
-        console.log(`\nYou have an equal score  ${CompS}\\${HumanS}`)
-        alert(`You have an equal score  ${CompS}\\${HumanS}`)
-    }
+    button.addEventListener("click", RestartGame);
+    div.appendChild(button);
+    
 }
 
-PlayGame()
+function RestartGame() {
+    // Reset Score and Round
+    let round_val = document.getElementsByClassName("round")[0];
+    let human_res = document.getElementsByClassName("human-res")[0];
+    let computer_res = document.getElementsByClassName("computer-res")[0];
+    round_val.textContent = ``
+    human_res.textContent = ``
+    computer_res.textContent = ``
+
+    // Delete reset button
+    const all_buttons = document.querySelector("button");
+    all_buttons.remove();
+    // Delete ending message
+    const res = document.getElementsByClassName("res_val")[0];
+    res.textContent = ``;
+    // Recreate the buttons to play
+    const div = document.getElementsByClassName("bbt")[0];
+    const btn_r = document.createElement("button");
+    btn_r.textContent = "rock"
+    btn_r.addEventListener("click", () => { PlayRound('rock');});
+    div.appendChild(btn_r);
+    const btn_p = document.createElement("button");
+    btn_p.textContent = "paper"
+    btn_p.addEventListener("click",() => { PlayRound('paper');});
+    div.appendChild(btn_p);
+    const btn_s = document.createElement("button");
+    btn_s.textContent = "scissors"
+    btn_s.addEventListener("click", () => { PlayRound('scissors');});
+    div.appendChild(btn_s);
+
+}

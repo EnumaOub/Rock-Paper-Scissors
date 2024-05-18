@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  color: #F9FAF8;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color:rgb(0, 0, 0);
+}
+
+.title {
+  margin-top: 200px;
+}
+
+.title h1 {
+  font-size: 35px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.title p {
+  font-size: 12px;
+  color: gray;
+  text-align: center;
+}
+
+.result {
+  padding: 50px;
+  position: relative;
+  width: 25vw;
+  height: 10vh;
+  align-items: center;
+  border: solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+table {
+  text-align: center;
+  border-spacing: 20px 0;
+}
+
+
+.bbt button {
+  border-radius: 8px;
+  background: #3b0186;
+  color: #F9FAF8;
+  padding: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  z-index: -1;
+  margin-left: 10px;
+}

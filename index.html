@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Page Title</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Rock Paper Scissors</title>
+  <script src="function.js"></script>
 </head>
+
 <body>
-  <script src="function.js">
-  </script>
+  <div class="title">
+  <h1>Rock Paper Scissors</h1>
+  <p>You need to choose what you want to use.</p>
+  <p>The first at 5 points win.</p>
+  </div>
+  <div class="result">
+    <table>
+        <tr>
+          <th><strong>ROUND</strong></th>
+          <th><strong>YOU</strong></th>
+          <th><strong>COMPUTER</strong></th>
+        </tr>
+        <tr>
+          <td class="round"></td>
+          <td class="human-res"></td>
+          <td class="computer-res"></td>
+        </tr>
+      </table>
+    <p class="res_val"></p>
+  </div>
+  <div class="bbt">
+    <button type="button" onclick="PlayRound('rock')">Rock</button>
+    <button type="button" onclick="PlayRound('paper')">Paper</button>
+    <button type="button" onclick="PlayRound('scissors')">Scissors</button>
+  </div>
 </body>
+
 </html>
