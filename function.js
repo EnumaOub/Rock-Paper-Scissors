@@ -128,15 +128,15 @@ function RestartGame() {
     // Recreate the buttons to play
     const div = document.getElementsByClassName("bbt")[0];
     const btn_r = document.createElement("button");
-    btn_r.textContent = "rock"
+    btn_r.innerHTML = "&#9994"
     btn_r.addEventListener("click", () => { PlayRound('rock');});
     div.appendChild(btn_r);
     const btn_p = document.createElement("button");
-    btn_p.textContent = "paper"
+    btn_p.innerHTML = "&#9995"
     btn_p.addEventListener("click",() => { PlayRound('paper');});
     div.appendChild(btn_p);
     const btn_s = document.createElement("button");
-    btn_s.textContent = "scissors"
+    btn_s.innerHTML = "&#9988"
     btn_s.addEventListener("click", () => { PlayRound('scissors');});
     div.appendChild(btn_s);
 
