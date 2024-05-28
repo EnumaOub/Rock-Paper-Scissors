@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Rock Paper Scissors</title>
   <script src="function.js"></script>
 </head>
@@ -23,18 +24,29 @@
           <th><strong>COMPUTER</strong></th>
         </tr>
         <tr>
-          <td class="round"></td>
+          <td class="round">0</td>
           <td class="human-res"></td>
           <td class="computer-res"></td>
         </tr>
+        <tr>
+          <td></td>
+          <td class="human-val">x</td>
+          <td class="computer-val">x</td>
+        </tr>
       </table>
-    <p class="res_val"></p>
+    <p class="res_val">You have not yet played</p>
   </div>
   <div class="bbt">
     <button type="button" onclick="PlayRound('rock')">&#9994</button>
     <button type="button" onclick="PlayRound('paper')">&#9995</button>
-    <button type="button" onclick="PlayRound('scissors')">&#9988</button>
+    <button type="button" onclick="PlayRound('scissors')">&#9996</button>
   </div>
+
+  <div class="footer">
+    <p>Copyright &copy EnumaOub <a href="https://github.com/EnumaOub"><i style="font-size:24px" class="fa">&#xf09b;</i></a></p>
+  </div>
+</div>
+
 </body>
 
 </html>

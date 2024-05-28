@@ -2,6 +2,23 @@ let results = {
     human: 0,
     computer: 0
 };
+
+let convEmoj = {
+    "rock": "&#9994",
+    "paper": "&#9995",
+    "scissors": "&#9996",
+};
+
+let resComp = {
+    "rock": "paper",
+    "paper": "scissors",
+    "scissors": "rock",
+}
+
+let GlobRes = {
+    emoji: convEmoj,
+    result: resComp
+};
     
 let round = 0;
 
@@ -13,52 +30,26 @@ function getComputerChoice() {
 
 
 function PlayRound(HumanC) {
-    console.log(`\n`)
+    let human_val = document.getElementsByClassName("human-val")[0];
+    let computer_val = document.getElementsByClassName("computer-val")[0];
     let CompC = getComputerChoice()
     let val_res = ""
     let res = document.getElementsByClassName("res_val")[0];
     
     if ( CompC == HumanC) {
-        console.log(`It's a tie : ${HumanC}`)
-        res.textContent = `It's a tie : ${HumanC}`
+        res.textContent = `It's a tie : ${HumanC}`;
         val_res = "Equal";
     }
-    else if (CompC == "rock"){
-        if (HumanC == "scissors") {
-            console.log(`You lose! ${CompC} beat ${HumanC}`)
-            res.textContent = `You lose! ${CompC} beat ${HumanC}`
-            val_res = "Computer";
-        }
-        else {
-            console.log(`You win! ${HumanC} beat ${CompC}`)
-            res.textContent = `You win! ${HumanC} beat ${CompC}`
-            val_res = "Human";
-        }
+    else if (GlobRes.result[HumanC] == CompC) {
+        val_res = "Computer";
+        res.textContent = `You lose! ${CompC} beat ${HumanC}`;
     }
-    else if (CompC == "scissors"){
-        if (HumanC == "paper") {
-            console.log(`You lose! ${CompC} beat ${HumanC}`)
-            res.textContent = `You lose! ${CompC} beat ${HumanC}`
-            val_res = "Computer";
-        }
-        else {
-            console.log(`You win! ${HumanC} beat ${CompC}`)
-            res.textContent = `You win! ${HumanC} beat ${CompC}`
-            val_res = "Human";
-        }
+    else {
+        val_res = "Human";
+        res.textContent = `You win! ${HumanC} beat ${CompC}`;
     }
-    else if (CompC == "paper"){
-        if (HumanC == "rock") {
-            console.log(`You lose! ${CompC} beat ${HumanC}`)
-            res.textContent = `You lose! ${CompC} beat ${HumanC}`
-            val_res = "Computer";
-        }
-        else {
-            console.log(`You win! ${HumanC} beat ${CompC}`)
-            res.textContent = `You win! ${HumanC} beat ${CompC}`
-            val_res = "Human";
-        }
-    }
+    computer_val.innerHTML = `${GlobRes.emoji[CompC]}`
+    human_val.innerHTML = `${GlobRes.emoji[HumanC]}`
     UpdateResults(val_res)
 }
 
@@ -66,6 +57,7 @@ function UpdateResults(res){
     let round_val = document.getElementsByClassName("round")[0];
     let human_res = document.getElementsByClassName("human-res")[0];
     let computer_res = document.getElementsByClassName("computer-res")[0];
+    
     if (res == "Human") {
         results.human += 1;
     }
@@ -83,6 +75,8 @@ function UpdateResults(res){
 
 function EndGame(val) {
     let res = document.getElementsByClassName("res_val")[0];
+    let human_val = document.getElementsByClassName("human-val")[0];
+    let computer_val = document.getElementsByClassName("computer-val")[0];
     // Show the message of the end
     if (val == "Human") {
         res.textContent = `You win!`;
@@ -95,6 +89,9 @@ function EndGame(val) {
     results.human = 0;
     results.computer = 0;
     round = 0;
+    // Reset last value
+    computer_val.textContent = `x`
+    human_val.textContent = `x`
     // Delete buttons allowing to play
     const all_buttons = document.querySelectorAll("button");
     all_buttons.forEach((item) => {
@@ -115,7 +112,7 @@ function RestartGame() {
     let round_val = document.getElementsByClassName("round")[0];
     let human_res = document.getElementsByClassName("human-res")[0];
     let computer_res = document.getElementsByClassName("computer-res")[0];
-    round_val.textContent = ``
+    round_val.textContent = `0`
     human_res.textContent = ``
     computer_res.textContent = ``
 
@@ -124,20 +121,14 @@ function RestartGame() {
     all_buttons.remove();
     // Delete ending message
     const res = document.getElementsByClassName("res_val")[0];
-    res.textContent = ``;
+    res.textContent = `You have not yet played`;
     // Recreate the buttons to play
     const div = document.getElementsByClassName("bbt")[0];
-    const btn_r = document.createElement("button");
-    btn_r.innerHTML = "&#9994"
-    btn_r.addEventListener("click", () => { PlayRound('rock');});
-    div.appendChild(btn_r);
-    const btn_p = document.createElement("button");
-    btn_p.innerHTML = "&#9995"
-    btn_p.addEventListener("click",() => { PlayRound('paper');});
-    div.appendChild(btn_p);
-    const btn_s = document.createElement("button");
-    btn_s.innerHTML = "&#9988"
-    btn_s.addEventListener("click", () => { PlayRound('scissors');});
-    div.appendChild(btn_s);
+    for (let key of Object.keys(GlobRes.emoji)){
+        const btn_r = document.createElement("button");
+        btn_r.innerHTML = GlobRes.emoji[key]
+        btn_r.addEventListener("click", () => { PlayRound(key);});
+        div.appendChild(btn_r);
+    }
 
 }
